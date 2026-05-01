@@ -2,27 +2,31 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0a0a0a;
-  --color-surface: #141414;
-  --color-border-mute: rgba(255, 255, 255, 0.1);
-  --color-text-dim: rgba(255, 255, 255, 0.55);
+  --color-police-dark: #0B1A28;
+  --color-police-surface: #122333;
+  --color-police-accent: #D4AF37;
+  --color-police-text: #E2E8F0;
   
-  --color-accent: #10b981; /* emerald-500 */
-  --color-danger: #ef4444; /* red-500 */
+  --color-bg: #0B1A28;
+  --color-surface: #122333;
+  --color-accent: #D4AF37;
+  --color-text-dim: #94a3b8;
+  
+  --color-danger: #ef4444;
 
-  --font-sans: "Be Vietnam Pro", sans-serif;
+  --shadow-neo-dark: 8px 8px 16px #07111a, -8px -8px 16px #0f2336;
+  --shadow-neo-inner: inset 4px 4px 8px #07111a, inset -4px -4px 8px #0f2336;
+
+  --font-sans: "Inter", "Be Vietnam Pro", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
   body {
     background-color: var(--color-bg);
-    color: white;
+    color: var(--color-police-text);
     font-family: var(--font-sans);
-    @apply overflow-x-hidden min-h-screen;
+    @apply transition-colors duration-500 overflow-x-hidden min-h-screen;
   }
 }
 

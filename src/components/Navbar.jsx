@@ -2,27 +2,27 @@ import React from "react";
 import { C } from "../data/projects";
 
 const Navbar = () => (
-  <nav className="sticky top-0 z-50 p-[10px_16px]">
-    <div className="bg-[#080f08]/80 border border-white/10 rounded-2xl backdrop-blur-2xl p-[10px_16px] flex justify-between items-center max-w-[480px] mx-auto">
-      <div className="flex items-center gap-[10px]">
-        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-lime to-teal grid place-items-center flex-shrink-0">
-          <span className="font-mono text-[11px] font-bold text-bg">SK</span>
+  <nav className="sticky top-0 z-50 py-6 px-4">
+    <div className="bg-police-surface/90 border border-white/5 rounded-2xl backdrop-blur-md p-4 flex justify-between items-center max-w-[480px] mx-auto shadow-neo-dark">
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 rounded-xl bg-police-accent shadow-neo-dark grid place-items-center flex-shrink-0 border border-white/5">
+          <span className="font-mono text-xs font-black text-police-dark">SK</span>
         </div>
         <div>
-          <div className="text-[13px] font-bold text-white leading-none">
-            Sáng Kiến Số
+          <div className="text-sm font-black text-police-text leading-none">
+            Sáng Kiến
           </div>
-          <div className="text-[9px] text-teal font-mono tracking-widest">
-            PORTFOLIO 2026
+          <div className="text-[9px] text-police-accent font-mono tracking-widest font-bold">
+            ARCHITECT 2026
           </div>
         </div>
       </div>
-      <div className="flex gap-[14px] items-center">
-        {["Dự Án", "Giới Thiệu", "Liên Hệ"].map((t) => (
+      <div className="flex gap-4 items-center">
+        {["Dự Án", "Liên Hệ"].map((t) => (
           <a
             key={t}
-            href={`#${t === "Dự Án" ? "projects" : t === "Giới Thiệu" ? "about" : "contact"}`}
-            className="text-[11px] text-white/55 no-underline transition-colors hover:text-lime"
+            href={`#${t === "Dự Án" ? "projects" : "contact"}`}
+            className="text-[10px] text-police-accent font-black no-underline transition-all hover:text-police-text hover:scale-110"
           >
             {t}
           </a>

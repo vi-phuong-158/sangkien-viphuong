@@ -12,90 +12,91 @@ const ProjectModal = ({ project: p, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 bg-black/75 backdrop-blur-[6px] z-[100] flex items-center justify-center p-4 animate-fadeSlideUp"
+      className="fixed inset-0 bg-police-dark/80 backdrop-blur-[6px] z-[100] flex items-center justify-center p-4 animate-fadeSlideUp"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="glass max-w-[520px] w-full max-h-[88vh] overflow-y-auto animate-fadeSlideUp !bg-[#0d1a0d]/80">
+      <div className="bg-police-surface max-w-[520px] w-full max-h-[88vh] overflow-y-auto animate-fadeSlideUp rounded-3xl shadow-neo-dark border border-white/5 scrollbar-hide">
         {/* header */}
-        <div className="p-[20px_20px_16px] border-b border-white/10 sticky top-0 bg-[#0d1a0d] z-[1] rounded-t-[24px]">
+        <div className="p-8 border-b border-white/5 sticky top-0 bg-police-surface/90 backdrop-blur-md z-[1] rounded-t-3xl">
           <div className="flex justify-between items-start">
             <div>
-              <div className="flex items-center gap-2 mb-[6px]">
-                <span className="text-xl leading-none">{p.icon}</span>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="text-2xl leading-none">{p.icon}</span>
                 <span
-                  className="font-mono text-[11px] tracking-widest"
-                  style={{ color: p.color }}
+                  className="font-mono text-xs tracking-widest font-bold text-police-accent"
                 >
                   {p.code}
                 </span>
                 <StatusDot online={p.status === "online"} />
               </div>
-              <h2 className="text-[17px] font-extrabold text-white leading-[1.3]">
+              <h2 className="text-xl font-black text-police-text leading-tight">
                 {p.name}
               </h2>
-              <div className="text-[13px] text-white/55 mt-[2px]">
+              <div className="text-sm text-police-text/50 mt-1 font-medium">
                 {p.subtitle}
               </div>
             </div>
             <button
               onClick={onClose}
-              className="bg-white/5 border border-white/12 rounded-lg text-white/55 text-base w-8 h-8 cursor-pointer grid place-items-center flex-shrink-0 hover:bg-white/10 transition-colors"
+              className="bg-police-surface shadow-neo-dark w-10 h-10 rounded-2xl text-police-accent grid place-items-center hover:scale-110 transition-transform border border-white/5"
             >
               ✕
             </button>
           </div>
-          <div className="flex gap-[6px] flex-wrap mt-[10px]">
+          <div className="flex gap-2 flex-wrap mt-6">
             {p.tags.map((t) => (
-              <Tag key={t} text={t} color={p.color} />
+              <Tag key={t} text={t} />
             ))}
           </div>
         </div>
 
         {/* body */}
-        <div className="p-[16px_20px_20px] flex flex-col gap-[18px]">
+        <div className="p-8 flex flex-col gap-10">
           {/* thực trạng */}
-          <div>
-            <div className="font-mono text-[9px] text-teal tracking-[0.12em] mb-[6px] uppercase">
+          <div className="bg-white/5 p-6 rounded-3xl shadow-neo-inner border border-white/5">
+            <div className="font-mono text-[10px] text-police-accent tracking-[0.2em] mb-3 uppercase font-black opacity-60">
               ◆ Thực trạng
             </div>
-            <p className="text-xs text-white/55 leading-[1.75]">{p.pain}</p>
+            <p className="text-sm text-police-text/70 leading-relaxed font-medium">{p.pain}</p>
           </div>
 
           {/* giải pháp */}
-          <div>
-            <div className="font-mono text-[9px] text-lime tracking-[0.12em] mb-[6px] uppercase">
+          <div className="bg-white/5 p-6 rounded-3xl shadow-neo-inner border border-white/5">
+            <div className="font-mono text-[10px] text-police-accent tracking-[0.2em] mb-3 uppercase font-black opacity-60">
               ■ Giải pháp
             </div>
-            <p className="text-xs text-white/55 leading-[1.75]">{p.solution}</p>
+            <p className="text-sm text-police-text/70 leading-relaxed font-medium">{p.solution}</p>
           </div>
 
           {/* hiệu quả */}
           <div>
-            <div className="font-mono text-[9px] text-[#f0c040] tracking-[0.12em] mb-2 uppercase">
+            <div className="font-mono text-[10px] text-police-accent tracking-[0.2em] mb-4 uppercase font-black opacity-60">
               ◆ Hiệu quả
             </div>
-            <div className="bg-white/[0.025] rounded-[10px] p-[4px_10px] border border-white/10">
-              <div className="grid grid-cols-3 gap-[6px] py-[6px] pb-2 border-b border-white/[0.08]">
-                <span className="text-[9px] font-mono text-white/25 uppercase tracking-wider">
+            <div className="bg-white/5 rounded-3xl p-6 shadow-neo-dark border border-white/5">
+              <div className="grid grid-cols-3 gap-4 pb-4 border-b border-white/5">
+                <span className="text-[10px] font-mono text-police-text/30 uppercase tracking-widest font-bold">
                   Tiêu chí
                 </span>
-                <span className="text-[9px] font-mono text-red-400 uppercase tracking-wider text-center">
+                <span className="text-[10px] font-mono text-danger uppercase tracking-widest font-bold text-center">
                   Trước
                 </span>
-                <span className="text-[9px] font-mono text-green-400 uppercase tracking-wider text-right">
+                <span className="text-[10px] font-mono text-police-accent uppercase tracking-widest font-bold text-right">
                   Sau
                 </span>
               </div>
-              {p.metrics.map(([l, b, a], i) => (
-                <MetricRow key={i} label={l} before={b} after={a} />
-              ))}
+              <div className="mt-4 flex flex-col gap-4">
+                {p.metrics.map(([l, b, a], i) => (
+                  <MetricRow key={i} label={l} before={b} after={a} />
+                ))}
+              </div>
             </div>
           </div>
 
           {/* demo button */}
           {p.hasDemo && (
-            <div className="flex justify-center pt-1">
-              <div className="bg-gradient-to-br from-lime to-teal rounded-full px-7 py-[10px] text-[13px] font-bold text-bg cursor-pointer tracking-wider shadow-[0_4px_20px_rgba(181,194,41,0.3)] hover:scale-105 transition-transform">
+            <div className="flex justify-center pt-4">
+              <div className="bg-police-accent shadow-neo-dark rounded-2xl px-10 py-4 text-sm font-black text-police-dark cursor-pointer tracking-widest hover:scale-105 transition-transform border border-white/5">
                 {p.demoLabel} ↗
               </div>
             </div>

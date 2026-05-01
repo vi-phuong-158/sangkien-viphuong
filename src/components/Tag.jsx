@@ -1,13 +1,8 @@
 import React from "react";
 
-const Tag = ({ text, color = "#b5c229" }) => (
+const Tag = ({ text }) => (
   <span
-    className="text-[10px] font-mono px-2 py-[2px] rounded-full tracking-wider whitespace-nowrap"
-    style={{
-      border: `1px solid ${color}44`,
-      color,
-      background: `${color}11`,
-    }}
+    className="text-[9px] font-mono px-3 py-1 rounded-full tracking-[0.1em] whitespace-nowrap bg-white/5 text-police-accent border border-white/10 font-black uppercase shadow-neo-inner"
   >
     {text}
   </span>
