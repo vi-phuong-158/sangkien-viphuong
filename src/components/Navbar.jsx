@@ -1,35 +1,71 @@
-import React from "react";
-import { C } from "../data/projects";
+import { useEffect, useState } from "react";
 
-const Navbar = () => (
-  <nav className="sticky top-0 z-50 py-6 px-4">
-    <div className="bg-police-surface/90 border border-white/5 rounded-2xl backdrop-blur-md p-4 flex justify-between items-center max-w-[480px] mx-auto shadow-neo-dark">
-      <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-police-accent shadow-neo-dark grid place-items-center flex-shrink-0 border border-white/5">
-          <span className="font-mono text-xs font-black text-police-dark">SK</span>
-        </div>
-        <div>
-          <div className="text-sm font-black text-police-text leading-none">
-            Sáng Kiến
-          </div>
-          <div className="text-[9px] text-police-accent font-mono tracking-widest font-bold">
-            ARCHITECT 2026
-          </div>
-        </div>
-      </div>
-      <div className="flex gap-4 items-center">
-        {["Dự Án", "Liên Hệ"].map((t) => (
-          <a
-            key={t}
-            href={`#${t === "Dự Án" ? "projects" : "contact"}`}
-            className="text-[10px] text-police-accent font-black no-underline transition-all hover:text-police-text hover:scale-110"
-          >
-            {t}
-          </a>
-        ))}
-      </div>
-    </div>
-  </nav>
-);
+const navLinks = [
+  ["Dự án", "#projects"],
+  ["Cảm hứng", "#inspire"],
+  ["Liên hệ", "#contact"],
+];
 
-export default Navbar;
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <nav
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 100,
+        backdropFilter: scrolled ? "blur(20px)" : "none",
+        WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
+        background: "rgb(10, 41, 29)",
+        color: "rgb(255, 255, 255)",
+        borderBottom: "1px solid rgb(17, 97, 17)",
+        borderTopColor: "rgb(17, 97, 17)",
+        borderRightColor: "rgb(17, 97, 17)",
+        borderLeftColor: "rgb(17, 97, 17)",
+        fontFamily: "Montserrat",
+        transition: "all .35s",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: 1200,
+          margin: "0 auto",
+          padding: "0 24px",
+          height: 60,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <a href="#top" className="brand-link">
+          <div className="brand-mark">🛡️</div>
+          <span style={{ fontSize: 13, fontWeight: 700, letterSpacing: 0 }}>
+            Vi Ngọc Phương
+          </span>
+        </a>
+
+        <div className="nav-links" style={{ display: "flex", gap: 28 }}>
+          {navLinks.map(([label, href]) => (
+            <a key={href} href={href} className="nav-link">
+              {label}
+            </a>
+          ))}
+        </div>
+
+        <a href="#contact" className="bs nav-cta" style={{ padding: "7px 18px", fontSize: 12 }}>
+          Liên hệ
+        </a>
+      </div>
+    </nav>
+  );
+}

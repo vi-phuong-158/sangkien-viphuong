@@ -1,40 +1,136 @@
-import React from "react";
+import ProjectImage from "./ProjectImage";
 
-const ProjectCard = ({ project, onClick }) => {
-  const isOnline = project.status === "online";
-  const statusLabel = isOnline ? "ONLINE" : "OFFLINE";
-  
+export default function ProjectCard({ project, index }) {
+  const delayClass = `d${(index % 3) + 1}`;
+
   return (
-    <div 
-      onClick={onClick}
-      className="bg-police-surface rounded-3xl p-8 shadow-neo-dark hover:scale-[1.02] transition-all duration-500 group cursor-pointer relative overflow-hidden flex flex-col h-full border border-white/5"
+    <div
+      className={`gc fu ${delayClass} ${project.featured ? "b-feat" : ""}`}
+      style={{
+        background: `linear-gradient(160deg,${project.color} 0%,rgba(18,18,20,0.6) 100%)`,
+        display: "flex",
+        flexDirection: "column",
+      }}
     >
-      <div className="flex justify-between items-start mb-6 relative z-10">
-        <span className="font-mono text-[10px] text-police-accent tracking-[0.2em] uppercase font-bold">
-          {project.code || project.id}
-        </span>
-        <span className={`font-mono text-[9px] tracking-[0.2em] uppercase flex items-center gap-2 ${isOnline ? 'text-police-accent' : 'text-danger'}`}>
-          <span className={`w-2 h-2 rounded-full ${isOnline ? 'bg-police-accent shadow-[0_0_10px_#D4AF37]' : 'bg-danger shadow-[0_0_10px_#ef4444]'}`} />
-          {statusLabel}
-        </span>
-      </div>
-      
-      <h3 className="text-xl font-bold text-police-text mb-3 font-sans leading-tight group-hover:text-police-accent transition-colors duration-300">
-        {project.name}
-      </h3>
-      <p className="text-xs text-police-text/60 leading-relaxed mb-8 flex-grow font-medium">
-        {project.subtitle}
-      </p>
-      
-      <div className="flex gap-3 flex-wrap relative z-10">
-        {project.tags.slice(0, 3).map((tag) => (
-          <span key={tag} className="font-mono text-[9px] bg-white/5 text-police-accent px-3 py-1 rounded-full border border-white/10 tracking-[0.1em] uppercase font-bold shadow-neo-inner">
-            {tag}
+      <ProjectImage project={project} />
+
+      <div
+        className="gc-body"
+        style={{
+          padding: "22px 24px 24px",
+          display: "flex",
+          flexDirection: "column",
+          flex: 1,
+          gap: 14,
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 8 }}>
+          <div>
+            <div
+              style={{
+                fontSize: 9,
+                fontWeight: 700,
+                letterSpacing: 0,
+                textTransform: "uppercase",
+                color: project.imgAccent,
+                background: `${project.imgAccent}14`,
+                border: `1px solid ${project.imgAccent}28`,
+                borderRadius: 6,
+                padding: "3px 8px",
+                display: "inline-block",
+              }}
+            >
+              {project.cat}
+            </div>
+          </div>
+          {project.featured && (
+            <div className="bdg acc-bdg" style={{ fontSize: 9, whiteSpace: "nowrap" }}>
+              ✦ Featured
+            </div>
+          )}
+        </div>
+
+        <div>
+          <h3
+            style={{
+              fontSize: project.featured ? 19 : 17,
+              fontWeight: 700,
+              color: "#fff",
+              letterSpacing: 0,
+              lineHeight: 1.25,
+              marginBottom: 4,
+            }}
+          >
+            {project.title}
+          </h3>
+          <p style={{ fontSize: 12, fontWeight: 500, color: "rgb(255, 255, 255)" }}>{project.sub}</p>
+        </div>
+
+        <p style={{ fontSize: 13.5, lineHeight: 1.68, fontWeight: 400, color: "rgb(255, 255, 255)" }}>
+          {project.desc}
+        </p>
+
+        <div
+          style={{
+            display: "inline-flex",
+            flexDirection: "column",
+            gap: 2,
+            background: "rgba(255,255,255,0.03)",
+            border: "1px solid rgba(255,255,255,0.05)",
+            borderRadius: 9,
+            padding: "9px 14px",
+            alignSelf: "flex-start",
+          }}
+        >
+          <span style={{ fontSize: 15, fontWeight: 800, color: "#fff", letterSpacing: 0 }}>
+            {project.stat.v}
           </span>
-        ))}
+          <span
+            style={{
+              fontSize: 9,
+              fontWeight: 600,
+              letterSpacing: 0,
+              textTransform: "uppercase",
+              color: "rgb(255, 255, 255)",
+            }}
+          >
+            {project.stat.l}
+          </span>
+        </div>
+
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+          {project.tags.map((tag) => (
+            <span key={tag} className="bdg" style={{ fontSize: 9.5 }}>
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <div style={{ marginTop: "auto", paddingTop: 4 }}>
+          {project.demoUrl ? (
+            <a
+              href={project.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-link"
+              style={{
+                color: project.imgAccent,
+                border: `1px solid ${project.imgAccent}22`,
+                background: `${project.imgAccent}08`,
+              }}
+            >
+              Live Demo / GitHub
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <path d="M7 7h10v10M7 17L17 7" />
+              </svg>
+            </a>
+          ) : (
+            <span style={{ fontSize: 11, color: "#3f3f46", fontStyle: "italic" }}>
+              Nội bộ · Internal use only
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );
-};
-
-export default ProjectCard;
+}

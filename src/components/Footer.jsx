@@ -1,14 +1,28 @@
-import React from "react";
+const footerLinks = [
+  ["GitHub", "https://github.com/vi-phuong-158"],
+  ["Email", "mailto:vinguocphuong@example.com"],
+];
 
-const Footer = () => (
-  <div className="text-center pb-12 border-t border-white/5 pt-8 mt-12">
-    <div className="text-[9px] font-mono text-police-text/30 tracking-widest font-bold">
-      © 2026 · VI NGỌC PHƯƠNG · AN NINH ĐỐI NGOẠI
-    </div>
-    <div className="text-[9px] text-police-text/20 mt-2 font-medium">
-      Sáng kiến cá nhân · Tinh nhuệ & Hiện đại
-    </div>
-  </div>
-);
+export default function Footer() {
+  return (
+    <footer style={{ borderTop: "1px solid rgba(255,255,255,0.05)", padding: "32px 24px" }}>
+      <div className="footer-inner">
+        <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
+          <div className="footer-mark">🛡️</div>
+          <span style={{ fontSize: 12, fontWeight: 700, color: "#fff" }}>Vi Ngọc Phương</span>
+          <span style={{ fontSize: 11, color: "#27272a" }}>· Kỹ sư An ninh Mạng · Công an tỉnh Phú Thọ</span>
+        </div>
 
-export default Footer;
+        <div style={{ fontSize: 11, color: "rgb(255, 255, 255)" }}>Always shipping · © 2026</div>
+
+        <div style={{ display: "flex", gap: 20, color: "rgb(254, 254, 255)" }}>
+          {footerLinks.map(([label, href]) => (
+            <a key={label} href={href} className="footer-link" target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noopener noreferrer" : undefined}>
+              {label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </footer>
+  );
+}
